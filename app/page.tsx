@@ -34,16 +34,6 @@ const handleInputChangeFile = useCallback(((input: HTMLInputElement)=>{
     console.log('file',file)
     // console.log(input.files)
 
-    const image= await convertImageToBase64(file)
-
-    const cloudinaryConfig = {
-      cloud_name: 'djk2jit4c',
-      api_key: '817918774428116',
-      api_secret: 'jzIU3Z_fLZQ_0dx1cG2IG4zZrGc',
-      
-    };
-  
-    // cloudinary.v2.config(cloudinaryConfig);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -67,25 +57,6 @@ const handleInputChangeFile = useCallback(((input: HTMLInputElement)=>{
   }
 }),[])
 
-function convertImageToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject)  => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.result && typeof reader.result === 'string') {
-        console.log(reader.result)
-        resolve(reader.result.split(',')[1]);
-      } else {
-        reject(new Error('Invalid result from FileReader'));
-      }
-    };
-    reader.onerror = (error) => {
-      reject(error);
-    };
-
-    reader.readAsDataURL(file);
-  });
-}
 
 
 function handleImageSelect(){
