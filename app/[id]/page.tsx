@@ -1,5 +1,4 @@
 'use client'
-import { graphQlClient } from "@/clients/api";
 import FeedCard from "@/components/FeedCard";
 import TwitterLayout from "@/components/Layouts/TwitterLayout";
 import { Tweet } from "@/gql/graphql";
