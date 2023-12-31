@@ -13,7 +13,7 @@ import { Tweet } from '@/gql/graphql';
 import TwitterLayout from '@/components/Layouts/TwitterLayout';
 
 
- function Home() {
+ export const Home= () =>{
    
   const [content, setContent] =useState('')
    const {user} = useCurrentUser()
@@ -122,4 +122,3 @@ function handleImageSelect(){
   )
 }
 
-export default Home
