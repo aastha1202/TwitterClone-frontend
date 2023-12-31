@@ -5,7 +5,7 @@ import { followUserMutation, unfollowUserMutation } from "@/graphql/mutation/use
 import { getCurrentUser, getUserById } from "@/graphql/query/user";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useCurrentUser = ()=>{
+ const useCurrentUser = ()=>{
     const query = useQuery ({
 
         queryKey: ['current-user'],
@@ -17,7 +17,7 @@ export const useCurrentUser = ()=>{
 }
 
 
-export const useUserById = (userId:string)=>{
+ const useUserById = (userId:string)=>{
     const query = useQuery ({
 
         queryKey: ['user-by-id',userId],
@@ -28,7 +28,7 @@ export const useUserById = (userId:string)=>{
     return {...query , user: query.data?.getUserById}
 }
 
-export const useFollowUser = () => {
+ const useFollowUser = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -42,7 +42,7 @@ export const useFollowUser = () => {
   return mutation;
 };
 
-export const useUnfollowUser = () => {
+ const useUnfollowUser = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -55,3 +55,6 @@ export const useUnfollowUser = () => {
 
   return mutation;
 };
+
+
+export {useUnfollowUser, useFollowUser, useCurrentUser,useUserById }

@@ -8,7 +8,7 @@ import {  useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 
-export const useCreateTweet =()=>{
+ const useCreateTweet =()=>{
     const query = useQueryClient()
     const mutation = useMutation({
         mutationFn: (payload: CreateTweetData)=> graphQlClient.request(CreateTweetMutation,{payload}),
@@ -35,7 +35,7 @@ interface Tweet {
     };
   }
  
-export const useGetAllTweets = ()=>{
+ const useGetAllTweets = ()=>{
     const query = useQuery ({
 
         queryKey: ['all-tweets'],
@@ -46,4 +46,4 @@ export const useGetAllTweets = ()=>{
     return {...query , tweets: query.data?.getAllTweets}
 }
 
-// export 
+export { useCreateTweet, useGetAllTweets };
