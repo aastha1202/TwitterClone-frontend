@@ -35,7 +35,7 @@ export const useFollowUser = () => {
     mutationFn: (to: string) => graphQlClient.request(followUserMutation, { to }),
       onSuccess: () => {
         // Invalidate relevant queries after a successful follow
-        queryClient.invalidateQueries(['current-user']);
+        queryClient.invalidateQueries({queryKey: ['current-user']});
       },
     });
 
@@ -49,7 +49,7 @@ export const useUnfollowUser = () => {
     mutationFn: (to: string) => graphQlClient.request(unfollowUserMutation, { to }),
       onSuccess: async () => {
         // Invalidate relevant queries after a successful unfollow
-        await queryClient.invalidateQueries(['current-user']);
+        await queryClient.invalidateQueries({queryKey:['current-user']});
       },
     });
 
