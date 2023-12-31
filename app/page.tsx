@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image'
-import FeedCard from "@/components/FeedCard"
+// import FeedCard from "@/components/FeedCard"
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useCallback, useState } from 'react';
 import   { Toaster } from 'react-hot-toast';
@@ -10,10 +10,25 @@ import { useCurrentUser } from '@/hooks/user';
 import { CiImageOn } from "react-icons/ci";
 import { useCreateTweet, useGetAllTweets } from '@/hooks/tweet';
 import { Tweet } from '@/gql/graphql';
-import TwitterLayout from '@/components/Layouts/TwitterLayout';
+import dynamic from 'next/dynamic';
+// import TwitterLayout from '@/components/Layouts/TwitterLayout';
+
+const TwitterLayout = dynamic(
+  ()=> import('@/components/Layouts/TwitterLayout'),
+  {
+    ssr:false,
+  }
+)
+
+const FeedCard = dynamic(
+  ()=> import('@/components/FeedCard'),
+  {
+    ssr:false,
+  }
+)
 
 
- function Home() {
+ const Home=()=> {
    
   const [content, setContent] =useState('')
    const {user} = useCurrentUser()
@@ -40,7 +55,7 @@ const handleInputChangeFile = useCallback(((input: HTMLInputElement)=>{
     formData.append('upload_preset', 'twitter-image');
     formData.append('folder', `upload/${user?.id}/tweets`);
 
-    const response = await fetch('https://api.cloudinary.com/v1_1/djk2jit4c/image/upload', {
+   try{ const response = await fetch('https://api.cloudinary.com/v1_1/djk2jit4c/image/upload', {
       method: 'POST',
       body: formData,
     });
@@ -52,6 +67,9 @@ const handleInputChangeFile = useCallback(((input: HTMLInputElement)=>{
       console.log('Image uploaded to Cloudinary:', imageURL);
     } else {
       console.error('Failed to upload image to Cloudinary');
+    }}
+    catch(error){
+console.log(error)
     }
  
   }

@@ -22,18 +22,6 @@ import toast from "react-hot-toast";
     return mutation
 }
 
-
-interface Tweet {
-    id: string;
-    content: string;
-    imageUrl: string | null;
-    author: {
-      id: string;
-      firstName: string;
-      lastName: string;
-      profileImageURL: string | null;
-    };
-  }
  
  const useGetAllTweets = ()=>{
     const query = useQuery ({

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import woman from "@/images/woman.png";
 import {AiOutlineRetweet,AiOutlineHeart,AiOutlineMessage} from 'react-icons/ai'
 import{GoShare} from 'react-icons/go'
 import { Tweet } from "@/gql/graphql";
