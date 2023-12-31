@@ -1,4 +1,3 @@
-import { DocumentNode } from 'graphql';
 import {graphql} from '../../gql';
 
 
@@ -19,11 +18,5 @@ export const getAllTweets= graphql(`
    }
 `);
 
-export const getSignedURL = graphql(`
-   #graphql
-   query Query($imageName: String!, $imageType: String!) {
-    getSignedURLForTweet(imageName: $imageName, imageType: $imageType)
-  }
-`)
 
 
