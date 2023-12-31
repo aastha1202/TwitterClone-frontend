@@ -76,3 +76,5 @@ export const UserProfilePage: NextPage = ()=>{
 
 
 
+
+export default UserProfilePage
