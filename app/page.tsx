@@ -29,7 +29,7 @@ export default function Home() {
 const handleInputChangeFile = useCallback(((input: HTMLInputElement)=>{
   return async(event: Event) =>{
     event.preventDefault();
-    const file: File | null | undefined = input.files?.item(0)
+    const file= input.files?.item(0)
     if(!file) return;
     console.log('file',file)
     // console.log(input.files)
