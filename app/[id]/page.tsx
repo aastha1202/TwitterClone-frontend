@@ -4,13 +4,12 @@ import TwitterLayout from "@/components/Layouts/TwitterLayout";
 import { Tweet } from "@/gql/graphql";
 import { useCurrentUser, useFollowUser, useUnfollowUser, useUserById } from "@/hooks/user";
 import { QueryClient } from "@tanstack/react-query";
-import {  NextPage } from "next";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {BsArrowLeftShort} from 'react-icons/bs'
 
-export const UserProfilePage: NextPage = ()=>{
+export const UserProfilePage = ()=>{
     const {user:logged_user} = useCurrentUser()
     const {id} = useParams()
     const {data} = useUserById(id as string )
