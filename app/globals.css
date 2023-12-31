@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+*:focus{
+  outline: none;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 0.1rem;
+}
