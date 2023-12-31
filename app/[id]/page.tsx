@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {BsArrowLeftShort} from 'react-icons/bs'
 
-const UserProfilePage: NextPage = ()=>{
+export const UserProfilePage: NextPage = ()=>{
     const {user:logged_user} = useCurrentUser()
     const {id} = useParams()
     const {data} = useUserById(id as string )
@@ -76,5 +76,3 @@ const UserProfilePage: NextPage = ()=>{
 
 
 
-
-export default UserProfilePage
