@@ -74,9 +74,10 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
          return toast.error('Error')
         }
     
+        toast.loading('Verifying...',{id:'1'})
         const {verifyGoogleToken} = await graphQlClient.request(verifyUserGoogleTokenQuery,{token:googleToken})
     
-        toast.success('Verified success')
+        toast.success('Verified success',{id:'1'})
         if(verifyGoogleToken) window.localStorage.setItem('token',verifyGoogleToken)
         console.log(verifyGoogleToken)
     
@@ -101,8 +102,8 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
       <div className='  col-span-3 flex flex-col gap-5 text-xl sticky  '>
         <FaXTwitter size="30px" />
         {SidebarMenuItem.map((item,index)=> 
-        <Link href={item.link} key={index}>  <div key={index} className='flex flex-row  gap-2 h-10 hover:bg-stone-900 cursor-pointer rounded-3xl px-3  sm:py-2 sm:items-center'>
-       {item.icon} <span className=' hidden sm:inline text-xl'>{item.title}</span></div></Link>)}
+        <Link href={item.link} key={index} className="flex">  <div key={index} className='flex flex-row  gap-2 h-10 hover:bg-stone-900 cursor-pointer  rounded-3xl px-3 sm:px-3  sm:py-3 sm:items-center'>
+        {item.icon}<span className=' hidden sm:inline-block  text-xl'>{item.title}</span></div></Link>)}
       
         <button className=' bg-blue-500  p-2 rounded-2xl sm:rounded-3xl sm:py-4'>Post</button>
         {user && <div className='flex gap-2 items-center  justify-center absolute bottom-0   p-3 hover:bg-stone-900 rounded-full cursor-pointer  '>

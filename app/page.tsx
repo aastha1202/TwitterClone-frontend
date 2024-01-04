@@ -4,7 +4,7 @@ import Image from 'next/image'
 // import FeedCard from "@/components/FeedCard"
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useCallback, useState } from 'react';
-import   { Toaster } from 'react-hot-toast';
+import   toast, { Toaster } from 'react-hot-toast';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useCurrentUser } from '@/hooks/user';
 import { CiImageOn } from "react-icons/ci";
@@ -88,16 +88,21 @@ function handleImageSelect(){
   input.click()
 }
   const handleTweetPost= useCallback(()=> {
-    mutate({
-      content,
-      imageUrl:imageURL
-    },
-    {
-      onSuccess: () => {
-        // Reset the content and imageURL states after successful mutation
-        setContent('');
-        setImageURL('');
-      }})
+    if(user){
+      mutate({
+        content,
+        imageUrl:imageURL
+      },
+      {
+        onSuccess: () => {
+          // Reset the content and imageURL states after successful mutation
+          setContent('');
+          setImageURL('');
+        }})
+    }
+    else {
+      toast.error("Please Sign in!")
+    }
     
   },[content,imageURL,mutate])
 
