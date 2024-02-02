@@ -65,7 +65,7 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
     
     ]  
      
-    // const queryClient = useQueryClient()
+    const query = useQueryClient()
     const  handleGoogleLogin =  useCallback(async(cred: CredentialResponse)=>{
         
         console.log('clicked')
@@ -77,15 +77,17 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
         toast.loading('Verifying...',{id:'1'})
         const {verifyGoogleToken} = await graphQlClient.request(verifyUserGoogleTokenQuery,{token:googleToken})
     
-        toast.success('Verified success',{id:'1'})
+      
         if(verifyGoogleToken) window.localStorage.setItem('token',verifyGoogleToken)
         console.log(verifyGoogleToken)
     
     
         //refecthing 
-       await queryClient.invalidateQueries(['current-user'] as InvalidateQueryFilters)
+      //  await queryClient.invalidateQueries(['current-user'] )
+       await query.invalidateQueries( {queryKey: ["current-user"]}) 
+       toast.success('Verified success',{id:'1'})
     
-      },[queryClient])
+      },[query])
   
 
   
@@ -98,7 +100,7 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
   <div>
       {/* <DynamicQueryClientProvider client={new QueryClient()} > */}
      <div>
-    <div className='grid grid-cols-12 sm:pl-40 sm:pr-40 sm:pt-3 h-screen w-fit'>
+    <div className='grid grid-cols-12 sm:pl-40 sm:pr-40 sm:pt-3 h-auto md:h-screen w-fit'>
       <div className='  col-span-3 flex flex-col gap-5 text-xl sticky  '>
         <FaXTwitter size="30px" />
         {SidebarMenuItem.map((item,index)=> 
