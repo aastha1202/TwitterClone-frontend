@@ -14,6 +14,7 @@ import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
 import { InvalidateQueryFilters, useQueryClient } from "@tanstack/react-query";
 import getQueryClient from "@/lib/get-query-client";
 import Link from "next/link";
+import {useMediaQuery} from 'react-responsive'
 
 
 
@@ -34,6 +35,7 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
 
      const queryClient = getQueryClient(); 
      const {user} = useCurrentUser();
+     const isMobileView = useMediaQuery({ query: '(max-width: 754px)' })
      const SidebarMenuItem: TwitterSidebar[]=[
       {
         title:"Home",
@@ -100,7 +102,7 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
   <div>
       {/* <DynamicQueryClientProvider client={new QueryClient()} > */}
      <div>
-    <div className='grid grid-cols-12 sm:pl-40 sm:pr-40 sm:pt-3 h-auto md:h-screen w-fit'>
+    <div className='grid grid-cols-12 lg:pl-40 md:pr-40 md:pt-3 h-screen w-fit'>
       <div className='  col-span-3 flex flex-col gap-5 text-xl sticky  '>
         <FaXTwitter size="30px" />
         {SidebarMenuItem.map((item,index)=> 
@@ -124,12 +126,23 @@ const TwitterLayout: React.FC<TwitterLayoutProps>=(props)=> {
         </div>
      {!user ?  (<div className='col-span-3'>
         <h3>New to Twitter?</h3>
+        {isMobileView ?
+          <GoogleLogin
+          type='icon'
+          onSuccess={credentialResponse => {handleGoogleLogin(credentialResponse)}}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+        : 
         <GoogleLogin
-        onSuccess={credentialResponse => {handleGoogleLogin(credentialResponse)}}
-        onError={() => {
-          console.log('Login Failed');
-        }}
-      />
+          type='standard'
+          onSuccess={credentialResponse => {handleGoogleLogin(credentialResponse)}}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
+        }
       </div>):
         <div  className='col-span-3  h-max p-[5%]  bg-stone-900  '>
         <h1> Users you may Know </h1>
